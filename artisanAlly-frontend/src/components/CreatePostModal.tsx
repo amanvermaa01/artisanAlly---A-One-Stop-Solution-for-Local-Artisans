@@ -1,0 +1,173 @@
+import React, { useState, useRef } from 'react';
+import { XMarkIcon, PhotoIcon } from '@heroicons/react/24/outline';
+import { usePostStore } from '../stores/postStore';
+import { useAuthStore } from '../stores/authStore';
+import ImageUpload from './ImageUpload';
+import api from '../services/api';
+
+interface CreatePostModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const CreatePostModal: React.FC<CreatePostModalProps> = ({ isOpen, onClose }) => {
+  const { createPost, isLoading } = usePostStore();
+  const { user } = useAuthStore();
+  const [formData, setFormData] = useState({
+    title: '',
+    content: ''
+  });
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>('');
+  const [uploading, setUploading] = useState(false);
+  const imageInputRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.title.trim() || !formData.content.trim()) {
+      return;
+    }
+
+    try {
+      setUploading(true);
+      
+      // Create FormData for file upload
+      const formDataToSend = new FormData();
+      formDataToSend.append('title', formData.title.trim());
+      formDataToSend.append('content', formData.content.trim());
+      
+      if (selectedImage) {
+        formDataToSend.append('image', selectedImage);
+      }
+      
+      // Use postStore to create post
+      const success = await createPost(formDataToSend);
+      
+      if (success) {
+        // Reset form
+        setFormData({ title: '', content: '' });
+        setSelectedImage(null);
+        setImagePreview('');
+        onClose();
+      }
+    } catch (error: any) {
+      console.error('Error creating post:', error);
+      alert(error.response?.data?.message || 'Failed to create post');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleImageSelect = (file: File) => {
+    setSelectedImage(file);
+    // Create preview
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setImagePreview(e.target?.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleImageRemove = () => {
+    setSelectedImage(null);
+    setImagePreview('');
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 overflow-y-auto">
+      <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+        <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" onClick={onClose}></div>
+
+        <span className="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+
+        <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-lg">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-medium text-gray-900">Create New Post</h3>
+            <button
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <XMarkIcon className="h-6 w-6" />
+            </button>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+                Title *
+              </label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                placeholder="Enter post title..."
+              />
+            </div>
+
+            <div>
+              <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-1">
+                Content *
+              </label>
+              <textarea
+                id="content"
+                name="content"
+                value={formData.content}
+                onChange={handleChange}
+                required
+                rows={4}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                placeholder="Share your story, technique, or inspiration..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Image (optional)
+              </label>
+              <ImageUpload
+                onImageSelect={handleImageSelect}
+                onImageRemove={handleImageRemove}
+                currentImage={imagePreview}
+                placeholder="Upload an image for your post"
+                maxSize={10}
+              />
+            </div>
+
+            <div className="flex justify-end space-x-3 pt-4">
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={uploading || !formData.title.trim() || !formData.content.trim()}
+                className="px-4 py-2 text-sm font-medium text-white bg-primary-600 border border-transparent rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {uploading ? 'Creating...' : 'Create Post'}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CreatePostModal;
