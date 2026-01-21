@@ -28,7 +28,12 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:3000', 'https://artisan-ally-a-one-stop-solution-fo.vercel.app'],
+  origin: [
+    'http://localhost:5173', 
+    'http://localhost:3000', 
+    process.env.FRONTEND_URL, // e.g. https://your-app.vercel.app
+    /^https:\/\/artisan-ally.*\.vercel\.app$/ // Matches any Vercel deployment of this app
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -64,9 +69,9 @@ app.use("/api/ai", aiRoute);
 app.use("/api/wishlist", wishlistRoute);
 
 const PORT = process.env.PORT || 5000;
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
-}
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
 
 // REQUIRED: Export the app for Vercel
 export default app;

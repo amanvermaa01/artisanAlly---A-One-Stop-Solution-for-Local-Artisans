@@ -49,6 +49,62 @@ A full-stack platform connecting artisans with customers, featuring post creatio
 - **React Hot Toast** for notifications
 - **Heroicons** for icons
 
+## 🖥️ UI Preview
+The screenshots below are captured from a **locally running instance** of **ArtisanAlly — A One-Stop Solution for Local Artisans**, showcasing the platform's marketplace experience, user dashboard, and AI-powered features.
+They demonstrate how data flows seamlessly from backend services into a **user-friendly, production-grade frontend interface**.
+
+---
+
+### 🏠 Homepage — Discover Local Artisans
+This is the **primary entry point** of the platform, designed to highlight local artisans and their handcrafted products.
+
+Key capabilities shown:
+- Featured artisans and curated products
+- Category-based browsing
+- Responsive, modern UI optimized for discovery
+- Clear call-to-action for user onboarding and exploration
+
+![Homepage](docs/images/homepage.png)
+
+---
+
+### 🛍️ Products — Marketplace & Listings
+This view represents the **core marketplace experience**, where users browse and explore artisan products.
+
+Key capabilities shown:
+- Product listings with pricing and availability
+- Detailed product cards with images and metadata
+- Seamless navigation between products and artisans
+- Scalable layout for future filtering and search
+
+![Products Marketplace](docs/images/products_page.png)
+
+---
+
+### 📊 User Dashboard — Profile & Activity Management
+The user dashboard provides a **centralized interface** for managing account-level interactions.
+
+Key capabilities shown:
+- User profile and account overview
+- Order history and saved items
+- Wishlist and cart access
+- Personalized experience based on user activity
+
+![User Dashboard](docs/images/user_dashboad.png)
+
+---
+
+### 🤖 AI Features — Smart Assistance for Users & Artisans
+This section showcases **AI-powered capabilities** integrated into the platform to enhance usability and engagement.
+
+Key capabilities shown:
+- AI-assisted content or product insights
+- Smart recommendations and summaries
+- Integration with external AI providers via secure backend APIs
+- Extensible design for future intelligent features
+
+![AI Features](docs/images/ai_features.png)
+
 ## Getting Started
 
 ### Prerequisites
@@ -260,4 +316,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Support
 
-For support, email support@artisanally.com or join our community Discord.
+For support, email akverma1426@gmail.com or join our community Discord.

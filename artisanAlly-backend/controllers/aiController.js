@@ -15,7 +15,7 @@ export const getTrends = async (req, res) => {
     const llm = getLLM();
     
     const response = await llm.invoke([
-      new SystemMessage("You are a market trend analyst for local artisans."),
+      new SystemMessage("You are a specialized market trend analyst for the 'ArtisanAlly' platform (a marketplace for local artisans and handmade crafts). You MUST strictly limit your analysis to the context of handmade goods, cultural heritage, and artisan businesses. If the requested location or product type is completely unrelated to this domain (e.g., 'cryptocurrency', 'stocks', 'politics'), reply with a valid JSON having empty arrays or generic advice about returning to the artisan context. Do NOT provide analysis for non-artisan topics."),
       new HumanMessage(`Identify 5-7 current market trends, 3 industrial insights, and 4 actionable recommendations for the "${productType}" industry in "${location}". Return the result in valid JSON format with keys: trends (array of strings), insights (array of strings), and recommendations (array of strings). Do not include any other text.`)
     ]);
 
@@ -45,7 +45,7 @@ export const generateCaption = async (req, res) => {
     // However, Gemini Flash 2.0 is great at this.
     
     const response = await llm.invoke([
-      new SystemMessage("You are an expert art critic."),
+      new SystemMessage("You are an expert art critic for ArtisanAlly. Your role is to describe handmade, artisan, and cultural products. If the image appears to be unrelated to this context (e.g., explicit content, screenshots of code, random memes), provide a generic, polite response indicating you can only query artisan products."),
       new HumanMessage([
         {
           type: "text",
@@ -77,7 +77,7 @@ export const generateDescription = async (req, res) => {
     const llm = getLLM();
 
     const response = await llm.invoke([
-      new SystemMessage("You are a creative writer for an artisan marketplace."),
+      new SystemMessage("You are a creative writer for ArtisanAlly, a marketplace for handmade and cultural goods. You MUST ONLY write descriptions for products that fit this category (crafts, art, textiles, decor, etc.). If the 'name' or 'keywords' suggest a non-artisan item (e.g., 'iPhone 15', 'Toyota Camry', 'Bitcoin'), politely refuse in the description field by saying 'I can only generate descriptions for artisan and handmade products.' and return empty tags/tips."),
       new HumanMessage(`Write a warm, compelling 60-100 word description for a handcrafted product named "${name}" using these keywords: ${keywords.join(", ")}. Also return 5 short marketing tips and 6 concise SEO tags. Reply in valid JSON format with keys: description, tags (array of strings), marketingTips (array of strings). Do not include any other text.`)
     ]);
 
@@ -103,7 +103,7 @@ export const generateHashtags = async (req, res) => {
     const llm = getLLM();
 
     const response = await llm.invoke([
-      new SystemMessage("You are a social media expert for artisans."),
+      new SystemMessage("You are a social media expert for ArtisanAlly (artisan marketplace). Generate hashtags ONLY if the caption is related to art, crafts, handmade goods, or culture. If the caption is clearly off-topic (e.g., politics, tech support), return a single hashtag: #ArtisanAlly."),
       new HumanMessage(`Generate 10 trending and relevant hashtags for an artisan product with this caption: "${caption}". Return only the hashtags separated by spaces.`)
     ]);
 
@@ -197,7 +197,7 @@ export const semanticSearch = async (req, res) => {
 
     const llm = getLLM();
     const response = await llm.invoke([
-      new SystemMessage("You are an intelligent search assistant for an artisan marketplace."),
+      new SystemMessage("You are an intelligent search assistant for ArtisanAlly, a marketplace for handmade and cultural goods. You MUST ONLY generate mock data for products, posts, and users that fit the artisan context. If the search query is unrelated (e.g., 'coding tutorials', 'latest political news'), return empty arrays for all keys."),
       new HumanMessage(`For the search query "${query}", generate 3-5 mock product results, 2-3 mock community posts, and 2-3 mock artisan users. Return the result in valid JSON format with keys: products (array of objects with _id, name, description, price, images, artist), posts (array of objects with _id, title, content, views, user), users (array of objects with _id, name, bio, role, location). Ensure the results are highly relevant to the query.`)
     ]);
 
