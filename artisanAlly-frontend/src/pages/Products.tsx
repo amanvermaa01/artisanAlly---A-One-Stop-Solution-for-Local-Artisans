@@ -4,8 +4,8 @@ import { useProductStore } from '../stores/productStore';
 import { useAuthStore } from '../stores/authStore';
 import ProductCard from '../components/ProductCard';
 import CreateProductModal from '../components/CreateProductModal';
-import { 
-  MagnifyingGlassIcon, 
+import {
+  MagnifyingGlassIcon,
   FunnelIcon,
   Squares2X2Icon,
   ListBulletIcon,
@@ -39,10 +39,10 @@ const Products = () => {
     // Price filter
     if (priceRange.min && product.price < parseInt(priceRange.min)) return false;
     if (priceRange.max && product.price > parseInt(priceRange.max)) return false;
-    
+
     // Category filter
-    if (selectedCategory && product.artist.category !== selectedCategory) return false;
-    
+    if (selectedCategory && product.artist?.category !== selectedCategory) return false;
+
     return true;
   });
 
@@ -60,7 +60,7 @@ const Products = () => {
     }
   });
 
-  const categories = Array.from(new Set(products.map(p => p.artist.category).filter(Boolean)));
+  const categories = Array.from(new Set(products.map(p => p.artist?.category).filter(Boolean)));
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -80,19 +80,19 @@ const Products = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-dark-950 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">Products</h1>
-              <p className="text-gray-600">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Products</h1>
+              <p className="text-gray-600 dark:text-gray-400">
                 Discover unique handcrafted items from talented artisans
               </p>
             </div>
             {isAuthenticated && user?.role === 'artisan' && (
-              <button 
+              <button
                 onClick={() => setShowCreateModal(true)}
                 className="btn-primary flex items-center space-x-2"
               >
@@ -104,7 +104,7 @@ const Products = () => {
         </div>
 
         {/* Search and Filters */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+        <div className="bg-white dark:bg-dark-900 rounded-lg shadow-sm border border-gray-200 dark:border-dark-800 p-6 mb-8 transition-colors duration-300">
           {/* Search Bar */}
           <form onSubmit={handleSearch} className="mb-6">
             <div className="relative">
@@ -113,7 +113,7 @@ const Products = () => {
                 placeholder="Search products, artisans, or keywords..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-dark-700 bg-white dark:bg-dark-800 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent placeholder-gray-400 dark:placeholder-gray-500"
               />
               <MagnifyingGlassIcon className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
             </div>
@@ -123,7 +123,7 @@ const Products = () => {
           <div className="flex items-center justify-between mb-4">
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="flex items-center space-x-2 text-gray-700 hover:text-primary-600 transition-colors"
+              className="flex items-center space-x-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
             >
               <FunnelIcon className="h-5 w-5" />
               <span>Filters</span>
@@ -131,7 +131,7 @@ const Products = () => {
 
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
-                <span className="text-sm text-gray-600">View:</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">View:</span>
                 <button
                   onClick={() => setViewMode('grid')}
                   title="Grid view"
@@ -152,7 +152,7 @@ const Products = () => {
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
                 title="Sort products"
-                className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="border border-gray-300 dark:border-dark-700 bg-white dark:bg-dark-800 text-gray-900 dark:text-white rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="newest">Newest First</option>
                 <option value="price-low">Price: Low to High</option>
@@ -164,18 +164,18 @@ const Products = () => {
 
           {/* Filters */}
           {showFilters && (
-            <div className="border-t border-gray-200 pt-6">
+            <div className="border-t border-gray-200 dark:border-dark-800 pt-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Category Filter */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Category
                   </label>
                   <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
                     title="Filter by category"
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className="w-full border border-gray-300 dark:border-dark-700 bg-white dark:bg-dark-800 text-gray-900 dark:text-white rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     <option value="">All Categories</option>
                     {categories.map(category => (
@@ -186,7 +186,7 @@ const Products = () => {
 
                 {/* Price Range */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Price Range
                   </label>
                   <div className="flex space-x-2">
@@ -195,14 +195,14 @@ const Products = () => {
                       placeholder="Min"
                       value={priceRange.min}
                       onChange={(e) => setPriceRange(prev => ({ ...prev, min: e.target.value }))}
-                      className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      className="flex-1 border border-gray-300 dark:border-dark-700 bg-white dark:bg-dark-800 text-gray-900 dark:text-white rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary-500 focus:border-transparent placeholder-gray-400 dark:placeholder-gray-500"
                     />
                     <input
                       type="number"
                       placeholder="Max"
                       value={priceRange.max}
                       onChange={(e) => setPriceRange(prev => ({ ...prev, max: e.target.value }))}
-                      className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      className="flex-1 border border-gray-300 dark:border-dark-700 bg-white dark:bg-dark-800 text-gray-900 dark:text-white rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary-500 focus:border-transparent placeholder-gray-400 dark:placeholder-gray-500"
                     />
                   </div>
                 </div>
@@ -211,7 +211,7 @@ const Products = () => {
                 <div className="flex items-end">
                   <button
                     onClick={clearFilters}
-                    className="flex items-center space-x-2 text-gray-600 hover:text-red-600 transition-colors"
+                    className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
                   >
                     <XMarkIcon className="h-5 w-5" />
                     <span>Clear Filters</span>
@@ -224,7 +224,7 @@ const Products = () => {
 
         {/* Results */}
         <div className="mb-6">
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-400">
             Showing {sortedProducts.length} of {products.length} products
             {searchQuery && ` for "${searchQuery}"`}
           </p>
@@ -240,8 +240,8 @@ const Products = () => {
             <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-4xl">🔍</span>
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No products found</h3>
-            <p className="text-gray-600 mb-4">
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No products found</h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
               {searchQuery ? 'Try adjusting your search terms or filters' : 'No products available at the moment'}
             </p>
             {searchQuery && (
@@ -255,25 +255,25 @@ const Products = () => {
           </div>
         ) : (
           <div className={
-            viewMode === 'grid' 
+            viewMode === 'grid'
               ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'
               : 'space-y-4'
           }>
             {sortedProducts.map((product) => (
-              <ProductCard 
-                key={product._id} 
-                product={product} 
+              <ProductCard
+                key={product._id}
+                product={product}
                 currentUserId={user?._id}
               />
             ))}
           </div>
         )}
       </div>
-      
+
       {/* Create Product Modal */}
-      <CreateProductModal 
-        isOpen={showCreateModal} 
-        onClose={() => setShowCreateModal(false)} 
+      <CreateProductModal
+        isOpen={showCreateModal}
+        onClose={() => setShowCreateModal(false)}
       />
     </div>
   );

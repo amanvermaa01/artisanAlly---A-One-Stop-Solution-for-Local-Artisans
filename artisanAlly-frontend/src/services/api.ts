@@ -31,7 +31,8 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
-      window.location.href = "/login";
+      // Don't redirect, just let the app handle the logged out state
+      // window.location.href = "/login";
     }
     return Promise.reject(error);
   }
@@ -158,6 +159,8 @@ export const cartAPI = {
   getCart: () => api.get("/cart"),
   removeFromCart: (productId: string) =>
     api.delete(`/cart/remove/${productId}`),
+  updateCartItemQuantity: (data: { productId: string; quantity: number }) =>
+    api.put("/cart/update", data),
 };
 
 // Checkout API

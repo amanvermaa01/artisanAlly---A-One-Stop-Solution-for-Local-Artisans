@@ -3,8 +3,8 @@ import { usePostStore } from '../stores/postStore';
 import { useAuthStore } from '../stores/authStore';
 import PostCard from '../components/PostCard';
 import CreatePostModal from '../components/CreatePostModal';
-import { 
-  MagnifyingGlassIcon, 
+import {
+  MagnifyingGlassIcon,
   FunnelIcon,
   PlusIcon
 } from '@heroicons/react/24/outline';
@@ -35,19 +35,19 @@ const Posts = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-dark-950 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">Artisan Stories</h1>
-              <p className="text-gray-600">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Artisan Stories</h1>
+              <p className="text-gray-600 dark:text-gray-400">
                 Discover the stories behind the crafts and connect with artisans
               </p>
             </div>
             {isAuthenticated && (
-              <button 
+              <button
                 onClick={() => setShowCreateModal(true)}
                 className="btn-primary flex items-center space-x-2"
               >
@@ -59,7 +59,7 @@ const Posts = () => {
         </div>
 
         {/* Search and Filters */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+        <div className="bg-white dark:bg-dark-900 rounded-lg shadow-sm border border-gray-200 dark:border-dark-800 p-6 mb-8 transition-colors duration-300">
           <div className="flex flex-col md:flex-row gap-4">
             {/* Search Bar */}
             <div className="flex-1">
@@ -69,7 +69,7 @@ const Posts = () => {
                   placeholder="Search posts, artisans, or stories..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-dark-700 bg-white dark:bg-dark-800 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent placeholder-gray-400 dark:placeholder-gray-500"
                 />
                 <MagnifyingGlassIcon className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
               </div>
@@ -81,7 +81,7 @@ const Posts = () => {
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
                 title="Sort posts"
-                className="w-full border border-gray-300 rounded-lg px-3 py-3 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full border border-gray-300 dark:border-dark-700 bg-white dark:bg-dark-800 text-gray-900 dark:text-white rounded-lg px-3 py-3 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="newest">Newest First</option>
                 <option value="oldest">Oldest First</option>
@@ -94,7 +94,7 @@ const Posts = () => {
 
         {/* Results */}
         <div className="mb-6">
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-400">
             Showing {filteredPosts.length} of {posts?.length || 0} posts
             {searchQuery && ` for "${searchQuery}"`}
           </p>
@@ -107,11 +107,11 @@ const Posts = () => {
           </div>
         ) : filteredPosts.length === 0 ? (
           <div className="text-center py-12">
-            <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-24 h-24 bg-gray-100 dark:bg-dark-800 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-4xl">📝</span>
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No posts found</h3>
-            <p className="text-gray-600 mb-4">
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No posts found</h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
               {searchQuery ? 'Try adjusting your search terms' : 'No posts available at the moment'}
             </p>
             {searchQuery && (
@@ -126,9 +126,9 @@ const Posts = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredPosts.map((post) => (
-              <PostCard 
-                key={post._id} 
-                post={post} 
+              <PostCard
+                key={post._id}
+                post={post}
                 currentUserId={user?._id}
                 onLike={likePost}
                 isLiked={user ? post.likes.includes(user._id) : false}
@@ -137,11 +137,11 @@ const Posts = () => {
           </div>
         )}
       </div>
-      
+
       {/* Create Post Modal */}
-      <CreatePostModal 
-        isOpen={showCreateModal} 
-        onClose={() => setShowCreateModal(false)} 
+      <CreatePostModal
+        isOpen={showCreateModal}
+        onClose={() => setShowCreateModal(false)}
       />
     </div>
   );

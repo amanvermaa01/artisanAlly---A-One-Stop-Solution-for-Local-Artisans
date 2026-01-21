@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAIStore } from '../stores/aiStore';
-import { 
+import {
   SparklesIcon,
   LightBulbIcon,
   TagIcon,
@@ -11,12 +11,12 @@ import {
 } from '@heroicons/react/24/outline';
 
 const AITools = () => {
-  const { 
-    trends, 
-    isLoading, 
-    getTrends, 
-    generateDescription, 
-    getImageTags, 
+  const {
+    trends,
+    isLoading,
+    getTrends,
+    generateDescription,
+    getImageTags,
     semanticSearch,
     generateCaption,
     generateHashtags
@@ -128,12 +128,12 @@ const AITools = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-dark-950 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">AI Tools</h1>
-          <p className="text-gray-600">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">AI Tools</h1>
+          <p className="text-gray-600 dark:text-gray-400">
             Leverage AI to enhance your products and reach more customers
           </p>
         </div>
@@ -144,25 +144,24 @@ const AITools = () => {
             <button
               key={tool.id}
               onClick={() => setActiveTool(tool.id)}
-              className={`p-6 rounded-lg border-2 text-left transition-all ${
-                activeTool === tool.id
-                  ? 'border-primary-500 bg-primary-50'
-                  : 'border-gray-200 bg-white hover:border-gray-300'
-              }`}
+              className={`p-6 rounded-lg border-2 text-left transition-all duration-300 ${activeTool === tool.id
+                ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20 dark:border-primary-500'
+                : 'border-gray-200 dark:border-dark-800 bg-white dark:bg-dark-900 hover:border-gray-300 dark:hover:border-dark-700'
+                }`}
             >
               <div className={`w-12 h-12 ${tool.bgColor} rounded-lg flex items-center justify-center mb-4`}>
                 <tool.icon className={`h-6 w-6 ${tool.color}`} />
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">{tool.name}</h3>
-              <p className="text-sm text-gray-600">{tool.description}</p>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{tool.name}</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{tool.description}</p>
             </button>
           ))}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Tool Interface */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-6">
+          <div className="bg-white dark:bg-dark-900 rounded-lg shadow-sm border border-gray-200 dark:border-dark-800 p-6 transition-colors duration-300">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
               {tools.find(t => t.id === activeTool)?.name}
             </h2>
 
@@ -170,7 +169,7 @@ const AITools = () => {
             {activeTool === 'trends' && (
               <form onSubmit={handleTrendsSubmit} className="space-y-4">
                 <div>
-                  <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="location" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Location
                   </label>
                   <input
@@ -184,7 +183,7 @@ const AITools = () => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="productType" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="productType" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Product Type
                   </label>
                   <input
@@ -211,7 +210,7 @@ const AITools = () => {
             {activeTool === 'description' && (
               <form onSubmit={handleDescriptionSubmit} className="space-y-4">
                 <div>
-                  <label htmlFor="productName" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="productName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Product Name
                   </label>
                   <input
@@ -226,7 +225,7 @@ const AITools = () => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="keywords" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="keywords" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Keywords (comma-separated)
                   </label>
                   <input
@@ -253,7 +252,7 @@ const AITools = () => {
             {activeTool === 'tags' && (
               <form onSubmit={handleTagsSubmit} className="space-y-4">
                 <div>
-                  <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Image URL
                   </label>
                   <input
@@ -281,7 +280,7 @@ const AITools = () => {
             {activeTool === 'search' && (
               <form onSubmit={handleSearchSubmit} className="space-y-4">
                 <div>
-                  <label htmlFor="searchQuery" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="searchQuery" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Search Query
                   </label>
                   <input
@@ -309,7 +308,7 @@ const AITools = () => {
             {activeTool === 'caption' && (
               <form onSubmit={handleCaptionSubmit} className="space-y-4">
                 <div>
-                  <label htmlFor="captionImageUrl" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="captionImageUrl" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Image URL
                   </label>
                   <input
@@ -337,7 +336,7 @@ const AITools = () => {
             {activeTool === 'hashtags' && (
               <form onSubmit={handleHashtagsSubmit} className="space-y-4">
                 <div>
-                  <label htmlFor="captionText" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="captionText" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Caption or Description
                   </label>
                   <textarea
@@ -363,9 +362,9 @@ const AITools = () => {
           </div>
 
           {/* Results */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-6">Results</h2>
-            
+          <div className="bg-white dark:bg-dark-900 rounded-lg shadow-sm border border-gray-200 dark:border-dark-800 p-6 transition-colors duration-300">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Results</h2>
+
             {isLoading ? (
               <div className="flex items-center justify-center py-12">
                 <div className="spinner"></div>
@@ -373,36 +372,36 @@ const AITools = () => {
             ) : activeTool === 'trends' && trends ? (
               <div className="space-y-6">
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Current Trends</h3>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Current Trends</h3>
                   <div className="space-y-2">
                     {trends.trends?.map((trend, index) => (
                       <div key={index} className="flex items-center space-x-2">
                         <SparklesIcon className="h-4 w-4 text-primary-600" />
-                        <span className="text-gray-700">{trend}</span>
+                        <span className="text-gray-700 dark:text-gray-300">{trend}</span>
                       </div>
                     ))}
                   </div>
                 </div>
-                
+
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Insights</h3>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Insights</h3>
                   <div className="space-y-2">
                     {trends.insights?.map((insight, index) => (
                       <div key={index} className="flex items-start space-x-2">
                         <LightBulbIcon className="h-4 w-4 text-yellow-600 mt-0.5" />
-                        <span className="text-gray-700">{insight}</span>
+                        <span className="text-gray-700 dark:text-gray-300">{insight}</span>
                       </div>
                     ))}
                   </div>
                 </div>
-                
+
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Recommendations</h3>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Recommendations</h3>
                   <div className="space-y-2">
                     {trends.recommendations?.map((rec, index) => (
                       <div key={index} className="flex items-start space-x-2">
                         <ChartBarIcon className="h-4 w-4 text-green-600 mt-0.5" />
-                        <span className="text-gray-700">{rec}</span>
+                        <span className="text-gray-700 dark:text-gray-300">{rec}</span>
                       </div>
                     ))}
                   </div>
@@ -413,19 +412,19 @@ const AITools = () => {
                 {/* Product Description Results */}
                 {results.description && (
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Description</h3>
-                    <p className="text-gray-700">{results.description}</p>
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Description</h3>
+                    <p className="text-gray-700 dark:text-gray-300">{results.description}</p>
                   </div>
                 )}
-                
+
                 {results.tags && (
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Tags</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Tags</h3>
                     <div className="flex flex-wrap gap-2">
-                      {results.tags.map((tag, index) => (
+                      {results.tags.map((tag: string, index: number) => (
                         <span
                           key={index}
-                          className="px-3 py-1 bg-primary-100 text-primary-800 text-sm rounded-full"
+                          className="px-3 py-1 bg-primary-100 dark:bg-primary-900/40 text-primary-800 dark:text-primary-300 text-sm rounded-full"
                         >
                           {tag}
                         </span>
@@ -433,34 +432,34 @@ const AITools = () => {
                     </div>
                   </div>
                 )}
-                
+
                 {results.marketingTips && (
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Marketing Tips</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Marketing Tips</h3>
                     <ul className="space-y-1">
-                      {results.marketingTips.map((tip, index) => (
+                      {results.marketingTips.map((tip: string, index: number) => (
                         <li key={index} className="flex items-start space-x-2">
                           <span className="text-primary-600">•</span>
-                          <span className="text-gray-700">{tip}</span>
+                          <span className="text-gray-700 dark:text-gray-300">{tip}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                 )}
-                
+
                 {/* Image Tags Results */}
                 {results.confidence && (
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Extracted Colors</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Extracted Colors</h3>
                     <div className="space-y-2">
-                      {results.tags?.map((tag, index) => (
+                      {results.tags?.map((tag: string, index: number) => (
                         <div key={index} className="flex items-center space-x-3">
-                          <div 
-                            className="w-6 h-6 rounded border border-gray-300" 
+                          <div
+                            className="w-6 h-6 rounded border border-gray-300"
                             style={{ backgroundColor: tag }}
                           ></div>
-                          <span className="text-gray-700 font-mono text-sm">{tag}</span>
-                          <span className="text-gray-500 text-xs">
+                          <span className="text-gray-700 dark:text-gray-300 font-mono text-sm">{tag}</span>
+                          <span className="text-gray-500 dark:text-gray-400 text-xs">
                             {(results.confidence[index] * 100).toFixed(0)}% confidence
                           </span>
                         </div>
@@ -468,48 +467,48 @@ const AITools = () => {
                     </div>
                   </div>
                 )}
-                
+
                 {/* Caption Results */}
                 {results.caption && (
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Generated Caption</h3>
-                    <div className="p-4 bg-gray-50 rounded-lg">
-                      <p className="text-gray-700 italic">"{results.caption}"</p>
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Generated Caption</h3>
+                    <div className="p-4 bg-gray-50 dark:bg-dark-800 rounded-lg border border-gray-100 dark:border-dark-700">
+                      <p className="text-gray-700 dark:text-gray-300 italic">"{results.caption}"</p>
                     </div>
                   </div>
                 )}
-                
+
                 {/* Hashtags Results */}
                 {results.hashtags && (
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Generated Hashtags</h3>
-                    <div className="p-4 bg-blue-50 rounded-lg">
-                      <p className="text-blue-700 font-mono text-sm">{results.hashtags}</p>
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Generated Hashtags</h3>
+                    <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-900/50 rounded-lg">
+                      <p className="text-blue-700 dark:text-blue-300 font-mono text-sm">{results.hashtags}</p>
                     </div>
                   </div>
                 )}
-                
+
                 {/* Semantic Search Results */}
                 {(results.products || results.posts || results.users) && (
                   <div className="space-y-6">
                     {results.products && results.products.length > 0 && (
                       <div>
-                        <h3 className="font-semibold text-gray-900 mb-3">Products</h3>
+                        <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Products</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          {results.products.map((product) => (
-                            <div key={product._id} className="border rounded-lg p-4">
+                          {results.products.map((product: any) => (
+                            <div key={product._id} className="border border-gray-200 dark:border-dark-800 rounded-lg p-4">
                               <div className="flex space-x-3">
                                 {product.images?.[0] && (
-                                  <img 
-                                    src={product.images[0]} 
+                                  <img
+                                    src={product.images[0]}
                                     alt={product.name}
                                     className="w-16 h-16 object-cover rounded"
                                   />
                                 )}
                                 <div className="flex-1">
-                                  <h4 className="font-medium text-gray-900">{product.name}</h4>
-                                  <p className="text-sm text-gray-600 line-clamp-2">{product.description}</p>
-                                  <p className="text-primary-600 font-semibold">${product.price}</p>
+                                  <h4 className="font-medium text-gray-900 dark:text-white">{product.name}</h4>
+                                  <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">{product.description}</p>
+                                  <p className="text-primary-600 dark:text-primary-400 font-semibold">${product.price}</p>
                                 </div>
                               </div>
                             </div>
@@ -517,16 +516,16 @@ const AITools = () => {
                         </div>
                       </div>
                     )}
-                    
+
                     {results.posts && results.posts.length > 0 && (
                       <div>
-                        <h3 className="font-semibold text-gray-900 mb-3">Posts</h3>
+                        <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Posts</h3>
                         <div className="space-y-3">
-                          {results.posts.map((post) => (
-                            <div key={post._id} className="border rounded-lg p-4">
-                              <h4 className="font-medium text-gray-900">{post.title}</h4>
-                              <p className="text-sm text-gray-600 mt-1 line-clamp-2">{post.content}</p>
-                              <div className="text-xs text-gray-500 mt-2">
+                          {results.posts.map((post: any) => (
+                            <div key={post._id} className="border border-gray-200 dark:border-dark-800 rounded-lg p-4">
+                              <h4 className="font-medium text-gray-900 dark:text-white">{post.title}</h4>
+                              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 line-clamp-2">{post.content}</p>
+                              <div className="text-xs text-gray-500 dark:text-gray-400 mt-2">
                                 by {post.user?.name} • {post.views} views
                               </div>
                             </div>
@@ -534,25 +533,25 @@ const AITools = () => {
                         </div>
                       </div>
                     )}
-                    
+
                     {results.users && results.users.length > 0 && (
                       <div>
-                        <h3 className="font-semibold text-gray-900 mb-3">Users</h3>
+                        <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Users</h3>
                         <div className="space-y-3">
-                          {results.users.map((user) => (
-                            <div key={user._id} className="border rounded-lg p-4">
+                          {results.users.map((user: any) => (
+                            <div key={user._id} className="border border-gray-200 dark:border-dark-800 rounded-lg p-4">
                               <div className="flex items-center space-x-3">
                                 {user.profilePicture && (
-                                  <img 
-                                    src={user.profilePicture} 
+                                  <img
+                                    src={user.profilePicture}
                                     alt={user.name}
                                     className="w-12 h-12 object-cover rounded-full"
                                   />
                                 )}
                                 <div>
-                                  <h4 className="font-medium text-gray-900">{user.name}</h4>
-                                  <p className="text-sm text-gray-600">{user.bio}</p>
-                                  <p className="text-xs text-gray-500">{user.role} • {user.location}</p>
+                                  <h4 className="font-medium text-gray-900 dark:text-white">{user.name}</h4>
+                                  <p className="text-sm text-gray-600 dark:text-gray-400">{user.bio}</p>
+                                  <p className="text-xs text-gray-500 dark:text-gray-400">{user.role} • {user.location}</p>
                                 </div>
                               </div>
                             </div>
@@ -560,26 +559,26 @@ const AITools = () => {
                         </div>
                       </div>
                     )}
-                    
-                    {(!results.products || results.products.length === 0) && 
-                     (!results.posts || results.posts.length === 0) && 
-                     (!results.users || results.users.length === 0) && (
-                      <div className="text-center py-8">
-                        <MagnifyingGlassIcon className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-                        <h3 className="text-lg font-medium text-gray-900 mb-2">No results found</h3>
-                        <p className="text-gray-600">
-                          Try a different search query to find products, posts, or users
-                        </p>
-                      </div>
-                    )}
+
+                    {(!results.products || results.products.length === 0) &&
+                      (!results.posts || results.posts.length === 0) &&
+                      (!results.users || results.users.length === 0) && (
+                        <div className="text-center py-8">
+                          <MagnifyingGlassIcon className="h-16 w-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+                          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No results found</h3>
+                          <p className="text-gray-600 dark:text-gray-400">
+                            Try a different search query to find products, posts, or users
+                          </p>
+                        </div>
+                      )}
                   </div>
                 )}
               </div>
             ) : (
               <div className="text-center py-12">
-                <SparklesIcon className="h-24 w-24 text-gray-300 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 mb-2">No results yet</h3>
-                <p className="text-gray-600">
+                <SparklesIcon className="h-24 w-24 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No results yet</h3>
+                <p className="text-gray-600 dark:text-gray-400">
                   Use the AI tools on the left to get insights and recommendations
                 </p>
               </div>

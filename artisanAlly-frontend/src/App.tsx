@@ -38,13 +38,13 @@ function App() {
       getMe();
     }
   }, [getMe]);
-  
+
   useEffect(() => {
     if (isAuthenticated) {
       fetchWishlist();
     }
   }, [isAuthenticated, fetchWishlist]);
-  
+
   // Initialize theme on app load
   useEffect(() => {
     if (theme === 'dark') {
@@ -59,84 +59,80 @@ function App() {
       <Router>
         <div className="min-h-screen bg-gray-50 dark:bg-dark-950 flex flex-col transition-colors duration-300">
           <Header />
-          
+
           <main className="flex-1">
             <Routes>
-            {/* Public Routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/:id" element={<ProductDetail />} />
-            <Route path="/posts" element={<Posts />} />
-            <Route path="/posts/:id" element={<PostDetail />} />
-            <Route path="/user/:id" element={<UserProfile />} />
-            
-            {/* Protected Routes */}
-            <Route path="/profile" element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            } />
-            <Route path="/cart" element={
-              <ProtectedRoute>
-                <Cart />
-              </ProtectedRoute>
-            } />
-            <Route path="/wishlist" element={
-              <ProtectedRoute>
-                <Wishlist />
-              </ProtectedRoute>
-            } />
-            <Route path="/checkout" element={
-              <ProtectedRoute>
-                <Checkout />
-              </ProtectedRoute>
-            } />
-            <Route path="/dashboard" element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            } />
-            <Route path="/ai-tools" element={
-              <ProtectedRoute>
-                <AITools />
-              </ProtectedRoute>
-            } />
-          </Routes>
-        </main>
-        
-        <Footer />
-        
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            duration: 4000,
-            className: '',
-            style: {},
-            success: {
-              duration: 3000,
-              className: 'bg-green-50 dark:bg-green-900 text-green-900 dark:text-green-100 border border-green-200 dark:border-green-700',
-              iconTheme: {
-                primary: '#10b981',
-                secondary: '#fff',
+              {/* Public Routes */}
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/products/:id" element={<ProductDetail />} />
+              <Route path="/posts" element={<Posts />} />
+              <Route path="/posts/:id" element={<PostDetail />} />
+              <Route path="/user/:id" element={<UserProfile />} />
+
+              {/* Protected Routes */}
+              <Route path="/profile" element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              } />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/wishlist" element={
+                <ProtectedRoute>
+                  <Wishlist />
+                </ProtectedRoute>
+              } />
+              <Route path="/checkout" element={
+                <ProtectedRoute>
+                  <Checkout />
+                </ProtectedRoute>
+              } />
+              <Route path="/dashboard" element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/ai-tools" element={
+                <ProtectedRoute>
+                  <AITools />
+                </ProtectedRoute>
+              } />
+            </Routes>
+          </main>
+
+          <Footer />
+
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              duration: 4000,
+              className: '',
+              style: {},
+              success: {
+                duration: 3000,
+                className: 'bg-green-50 dark:bg-green-900 text-green-900 dark:text-green-100 border border-green-200 dark:border-green-700',
+                iconTheme: {
+                  primary: '#10b981',
+                  secondary: '#fff',
+                },
               },
-            },
-            error: {
-              duration: 5000,
-              className: 'bg-red-50 dark:bg-red-900 text-red-900 dark:text-red-100 border border-red-200 dark:border-red-700',
-              iconTheme: {
-                primary: '#ef4444',
-                secondary: '#fff',
+              error: {
+                duration: 5000,
+                className: 'bg-red-50 dark:bg-red-900 text-red-900 dark:text-red-100 border border-red-200 dark:border-red-700',
+                iconTheme: {
+                  primary: '#ef4444',
+                  secondary: '#fff',
+                },
               },
-            },
-            loading: {
-              className: 'bg-blue-50 dark:bg-blue-900 text-blue-900 dark:text-blue-100 border border-blue-200 dark:border-blue-700',
-            },
-          }}
-        />
-      </div>
+              loading: {
+                className: 'bg-blue-50 dark:bg-blue-900 text-blue-900 dark:text-blue-100 border border-blue-200 dark:border-blue-700',
+              },
+            }}
+          />
+        </div>
       </Router>
     </ErrorBoundary>
   );

@@ -75,17 +75,30 @@ export const useCartStore = create<CartState>()(
         }
       },
 
-      updateQuantity: (productId: string, quantity: number) => {
+      updateQuantity: async (productId: string, quantity: number) => {
         if (quantity <= 0) {
           get().removeFromCart(productId);
           return;
         }
 
+        const originalItems = get().items;
+
+        // Optimistic update
         set((state) => ({
           items: state.items.map((item) =>
             item.product._id === productId ? { ...item, quantity } : item
           ),
         }));
+
+        try {
+          await cartAPI.updateCartItemQuantity({ productId, quantity });
+        } catch (error: any) {
+          // Revert on error
+          set({ items: originalItems });
+          toast.error(
+            error.response?.data?.message || "Failed to update quantity"
+          );
+        }
       },
 
       clearCart: () => {

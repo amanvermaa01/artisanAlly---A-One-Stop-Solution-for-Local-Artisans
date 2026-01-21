@@ -1,5 +1,8 @@
+import "dotenv/config";
+console.log("DEBUG: AI_API_KEY from process.env:", process.env.AI_API_KEY ? "EXISTS" : "MISSING");
+console.log("DEBUG: AI_PROVIDER from process.env:", process.env.AI_PROVIDER);
 import express from "express";
-import dotenv from "dotenv";
+
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
@@ -18,7 +21,6 @@ import paymentRoute from "./routes/paymentRoute.js";
 import aiRoute from "./routes/aiRoute.js";
 import wishlistRoute from "./routes/wishlistRoute.js";
 
-dotenv.config();
 connectDB();
 
 const app = express();
@@ -63,3 +65,5 @@ app.use("/api/wishlist", wishlistRoute);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
+export default app;

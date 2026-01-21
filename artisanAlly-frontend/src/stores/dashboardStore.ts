@@ -4,11 +4,16 @@ import { dashboardAPI } from "../services/api";
 import toast from "react-hot-toast";
 
 interface DashboardAnalytics {
-  totalFollowers: number;
-  totalFollowing: number;
-  totalPosts: number;
-  totalLikes: number;
-  totalViews: number;
+  totalFollowers?: number;
+  totalFollowing?: number;
+  totalPosts?: number;
+  totalLikes?: number;
+  totalViews?: number;
+  totalRevenue?: number;
+  totalOrders?: number;
+  totalSpent?: number;
+  ordersPlaced?: number;
+  recentOrders?: any[];
 }
 
 interface DashboardState {
@@ -54,6 +59,7 @@ export const useDashboardStore = create<DashboardState>((set, get) => ({
       } else if (data.dashboard === "Customer" || data.dashboard === "customer") {
         set({
           dashboard: "customer",
+          analytics: data.analytics,
           artisans: data.artisans || [],
           posts: data.posts || [],
           isLoading: false,

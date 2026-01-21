@@ -5,9 +5,9 @@ import { useCartStore } from '../stores/cartStore';
 import { useWishlistStore } from '../stores/wishlistStore';
 import ThemeToggle from './ThemeToggle';
 import {
-  ShoppingCartIcon, 
-  UserIcon, 
-  Bars3Icon, 
+  ShoppingCartIcon,
+  UserIcon,
+  Bars3Icon,
   XMarkIcon,
   MagnifyingGlassIcon,
   SparklesIcon,
@@ -36,30 +36,30 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white dark:bg-dark-900 shadow-soft dark:shadow-gray-700/20 sticky top-0 z-50 transition-colors duration-300">
+    <header className="glass sticky top-0 z-50 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <img 
-              src="/artisan-ally-logo.svg" 
-              alt="ArtisanAlly" 
-              className="w-8 h-8"
+          <Link to="/" className="flex items-center space-x-2 group">
+            <img
+              src="/artisan-ally-logo.svg"
+              alt="ArtisanAlly"
+              className="w-8 h-8 group-hover:scale-110 transition-transform duration-300"
             />
-            <span className="text-xl font-bold text-gradient dark:text-white">ArtisanAlly</span>
+            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-purple-600 dark:from-primary-400 dark:to-purple-400">ArtisanAlly</span>
           </Link>
 
           {/* Search Bar - Desktop */}
           <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-lg mx-8">
-            <div className="relative w-full">
+            <div className="relative w-full group">
               <input
                 type="text"
                 placeholder="Search products, artisans, stories..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-dark-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors duration-300"
+                className="w-full pl-10 pr-4 py-2 border border-gray-200 dark:border-slate-700 rounded-full bg-gray-50 dark:bg-slate-800/50 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-300"
               />
-              <MagnifyingGlassIcon className="absolute left-3 top-2.5 h-5 w-5 text-gray-400 dark:text-gray-500" />
+              <MagnifyingGlassIcon className="absolute left-3 top-2.5 h-5 w-5 text-gray-400 dark:text-gray-500 group-focus-within:text-primary-500 transition-colors" />
             </div>
           </form>
 
@@ -74,7 +74,7 @@ const Header = () => {
             <Link to="/ai-tools" className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
               AI Tools
             </Link>
-            
+
             {/* Wishlist */}
             {isAuthenticated && (
               <Link to="/wishlist" className="relative p-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
@@ -86,7 +86,7 @@ const Header = () => {
                 )}
               </Link>
             )}
-            
+
             {/* Cart */}
             <Link to="/cart" className="relative p-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
               <ShoppingCartIcon className="h-6 w-6" />
@@ -126,7 +126,7 @@ const Header = () => {
                 </Link>
               </div>
             )}
-            
+
             {/* Theme Toggle - Rightmost position */}
             <ThemeToggle size="sm" />
           </nav>

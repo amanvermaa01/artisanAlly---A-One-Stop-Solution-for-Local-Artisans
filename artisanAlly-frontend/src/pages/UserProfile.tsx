@@ -6,10 +6,10 @@ import { User, Post, Product } from '../types';
 import PostCard from '../components/PostCard';
 import ProductCard from '../components/ProductCard';
 import FollowButton from '../components/FollowButton';
-import { 
-  UserIcon, 
-  MapPinIcon, 
-  PhoneIcon, 
+import {
+  UserIcon,
+  MapPinIcon,
+  PhoneIcon,
   CalendarIcon,
   UserPlusIcon,
   UserMinusIcon,
@@ -34,7 +34,7 @@ const UserProfile = () => {
 
   const fetchUserProfile = async () => {
     if (!id) return;
-    
+
     setIsLoading(true);
     try {
       const response = await profileAPI.getUserProfile(id);
@@ -51,18 +51,18 @@ const UserProfile = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="spinner"></div>
+      <div className="min-h-screen bg-gray-50 dark:bg-dark-950 flex items-center justify-center transition-colors duration-300">
+        <div className="spinner dark:border-white"></div>
       </div>
     );
   }
 
   if (!profile) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-dark-950 flex items-center justify-center transition-colors duration-300">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">User Not Found</h1>
-          <p className="text-gray-600 mb-4">The profile you're looking for doesn't exist.</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">User Not Found</h1>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">The profile you're looking for doesn't exist.</p>
           <Link to="/" className="btn-primary">Go Home</Link>
         </div>
       </div>
@@ -72,12 +72,12 @@ const UserProfile = () => {
   const isOwnProfile = currentUser?._id === profile._id;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-dark-950 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Profile Header */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 mb-8">
+        <div className="bg-white dark:bg-dark-900 rounded-lg shadow-sm border border-gray-200 dark:border-dark-800 mb-8 transition-colors duration-300">
           {/* Cover Photo */}
-          <div className="h-32 bg-gradient-to-r from-primary-400 to-secondary-400 rounded-t-lg relative">
+          <div className="h-32 bg-gradient-to-r from-primary-400 to-secondary-400 dark:from-primary-600 dark:to-secondary-600 rounded-t-lg relative">
             {profile.backgroundPhoto && (
               <img
                 src={profile.backgroundPhoto}
@@ -86,12 +86,12 @@ const UserProfile = () => {
               />
             )}
           </div>
-          
+
           <div className="px-6 pb-6">
             <div className="flex flex-col sm:flex-row sm:items-end sm:space-x-5 -mt-12">
               {/* Profile Picture */}
               <div className="flex-shrink-0">
-                <div className="w-24 h-24 bg-white rounded-full border-4 border-white shadow-lg flex items-center justify-center">
+                <div className="w-24 h-24 bg-white dark:bg-dark-900 rounded-full border-4 border-white dark:border-dark-900 shadow-lg flex items-center justify-center">
                   {profile.profilePicture ? (
                     <img
                       src={profile.profilePicture}
@@ -107,10 +107,10 @@ const UserProfile = () => {
               {/* Profile Info */}
               <div className="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
                 <div className="sm:hidden md:block mt-6 min-w-0 flex-1">
-                  <h1 className="text-2xl font-bold text-gray-900 truncate">{profile.name}</h1>
-                  <p className="text-sm text-gray-500 capitalize">{profile.role}</p>
+                  <h1 className="text-2xl font-bold text-gray-900 dark:text-white truncate">{profile.name}</h1>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 capitalize">{profile.role}</p>
                 </div>
-                
+
                 <div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
                   {!isOwnProfile && isAuthenticated && (
                     <FollowButton
@@ -119,11 +119,11 @@ const UserProfile = () => {
                       className="inline-flex justify-center"
                     />
                   )}
-                  
+
                   {isOwnProfile && (
                     <Link
                       to="/dashboard"
-                      className="inline-flex justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                      className="inline-flex justify-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-dark-800 hover:bg-gray-50 dark:hover:bg-dark-700 transition-colors"
                     >
                       Edit Profile
                     </Link>
@@ -133,8 +133,8 @@ const UserProfile = () => {
             </div>
 
             <div className="hidden sm:block md:hidden mt-6 min-w-0 flex-1">
-              <h1 className="text-2xl font-bold text-gray-900 truncate">{profile.name}</h1>
-              <p className="text-sm text-gray-500 capitalize">{profile.role}</p>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white truncate">{profile.name}</h1>
+              <p className="text-sm text-gray-500 dark:text-gray-400 capitalize">{profile.role}</p>
             </div>
           </div>
         </div>
@@ -143,33 +143,33 @@ const UserProfile = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
           {/* Profile Details */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">About</h2>
-              
+            <div className="bg-white dark:bg-dark-900 rounded-lg shadow-sm border border-gray-200 dark:border-dark-800 p-6 transition-colors duration-300">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">About</h2>
+
               <div className="space-y-4">
                 {profile.bio && (
-                  <p className="text-gray-700">{profile.bio}</p>
+                  <p className="text-gray-700 dark:text-gray-300">{profile.bio}</p>
                 )}
-                
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="flex items-center space-x-2 text-gray-600">
+                  <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
                     <MapPinIcon className="h-5 w-5" />
                     <span>{profile.location}</span>
                   </div>
-                  
-                  <div className="flex items-center space-x-2 text-gray-600">
+
+                  <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
                     <CalendarIcon className="h-5 w-5" />
                     <span>Joined {new Date(profile.createdAt).toLocaleDateString()}</span>
                   </div>
-                  
+
                   {profile.category && (
-                    <div className="flex items-center space-x-2 text-gray-600">
+                    <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
                       <UserIcon className="h-5 w-5" />
                       <span>{profile.category}</span>
                     </div>
                   )}
-                  
-                  <div className="flex items-center space-x-2 text-gray-600">
+
+                  <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
                     <EnvelopeIcon className="h-5 w-5" />
                     <span>{profile.email}</span>
                   </div>
@@ -180,29 +180,29 @@ const UserProfile = () => {
 
           {/* Stats */}
           <div className="space-y-6">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Stats</h2>
-              
+            <div className="bg-white dark:bg-dark-900 rounded-lg shadow-sm border border-gray-200 dark:border-dark-800 p-6 transition-colors duration-300">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Stats</h2>
+
               <div className="space-y-4">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Followers</span>
-                  <span className="font-semibold">{profile.followers?.length || 0}</span>
+                  <span className="text-gray-600 dark:text-gray-400">Followers</span>
+                  <span className="font-semibold text-gray-900 dark:text-white">{profile.followers?.length || 0}</span>
                 </div>
-                
+
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Following</span>
-                  <span className="font-semibold">{profile.following?.length || 0}</span>
+                  <span className="text-gray-600 dark:text-gray-400">Following</span>
+                  <span className="font-semibold text-gray-900 dark:text-white">{profile.following?.length || 0}</span>
                 </div>
-                
+
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Posts</span>
-                  <span className="font-semibold">{posts.length}</span>
+                  <span className="text-gray-600 dark:text-gray-400">Posts</span>
+                  <span className="font-semibold text-gray-900 dark:text-white">{posts.length}</span>
                 </div>
-                
+
                 {profile.role === 'artisan' && (
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Products</span>
-                    <span className="font-semibold">{products.length}</span>
+                    <span className="text-gray-600 dark:text-gray-400">Products</span>
+                    <span className="font-semibold text-gray-900 dark:text-white">{products.length}</span>
                   </div>
                 )}
               </div>
@@ -211,28 +211,26 @@ const UserProfile = () => {
         </div>
 
         {/* Content Tabs */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-          <div className="border-b border-gray-200">
+        <div className="bg-white dark:bg-dark-900 rounded-lg shadow-sm border border-gray-200 dark:border-dark-800 transition-colors duration-300">
+          <div className="border-b border-gray-200 dark:border-dark-800">
             <nav className="flex space-x-8 px-6">
               <button
                 onClick={() => setActiveTab('posts')}
-                className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                  activeTab === 'posts'
-                    ? 'border-primary-500 text-primary-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
+                className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${activeTab === 'posts'
+                    ? 'border-primary-500 text-primary-600 dark:text-primary-400'
+                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600'
+                  }`}
               >
                 Posts ({posts.length})
               </button>
-              
+
               {profile.role === 'artisan' && (
                 <button
                   onClick={() => setActiveTab('products')}
-                  className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                    activeTab === 'products'
-                      ? 'border-primary-500 text-primary-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  }`}
+                  className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${activeTab === 'products'
+                      ? 'border-primary-500 text-primary-600 dark:text-primary-400'
+                      : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600'
+                    }`}
                 >
                   Products ({products.length})
                 </button>
@@ -245,17 +243,17 @@ const UserProfile = () => {
               <div className="space-y-6">
                 {posts.length === 0 ? (
                   <div className="text-center py-12">
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">No posts yet</h3>
-                    <p className="text-gray-600">
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No posts yet</h3>
+                    <p className="text-gray-600 dark:text-gray-400">
                       {isOwnProfile ? "You haven't" : `${profile.name} hasn't`} shared any posts yet.
                     </p>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {posts.map((post) => (
-                      <PostCard 
-                        key={post._id} 
-                        post={post} 
+                      <PostCard
+                        key={post._id}
+                        post={post}
                         currentUserId={currentUser?._id}
                       />
                     ))}
@@ -268,17 +266,17 @@ const UserProfile = () => {
               <div className="space-y-6">
                 {products.length === 0 ? (
                   <div className="text-center py-12">
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">No products yet</h3>
-                    <p className="text-gray-600">
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No products yet</h3>
+                    <p className="text-gray-600 dark:text-gray-400">
                       {isOwnProfile ? "You haven't" : `${profile.name} hasn't`} listed any products yet.
                     </p>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {products.map((product) => (
-                      <ProductCard 
-                        key={product._id} 
-                        product={product} 
+                      <ProductCard
+                        key={product._id}
+                        product={product}
                         currentUserId={currentUser?._id}
                       />
                     ))}

@@ -57,6 +57,16 @@ export interface CartItem {
   quantity: number;
 }
 
+export interface Order {
+  _id: string;
+  product: Product;
+  buyer: User;
+  artist: User;
+  price: number;
+  status: string;
+  createdAt: string;
+}
+
 export interface Cart {
   items: CartItem[];
   total: number;

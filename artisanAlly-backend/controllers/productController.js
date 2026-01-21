@@ -59,7 +59,10 @@ export const getAllProducts = async (req, res) => {
     }
 
     // Get all products with artist details
-    const products = await Product.find().populate("artist");
+    let products = await Product.find().populate("artist");
+    
+    // Filter out products with missing artists
+    products = products.filter(product => product.artist !== null);
     
     // If user has following list, prioritize followed artists' products
     if (followingList.length > 0) {

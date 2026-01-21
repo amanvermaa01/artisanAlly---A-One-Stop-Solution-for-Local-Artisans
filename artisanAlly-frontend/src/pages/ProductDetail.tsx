@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useProductStore } from '../stores/productStore';
 import { useCartStore } from '../stores/cartStore';
 import { useAuthStore } from '../stores/authStore';
-import { 
+import {
   ArrowLeftIcon,
   HeartIcon,
   ShareIcon,
@@ -54,18 +54,18 @@ const ProductDetail = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="spinner"></div>
+      <div className="min-h-screen bg-gray-50 dark:bg-dark-950 flex items-center justify-center transition-colors duration-300">
+        <div className="spinner dark:border-white"></div>
       </div>
     );
   }
 
   if (!currentProduct) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-dark-950 flex items-center justify-center transition-colors duration-300">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Product not found</h2>
-          <p className="text-gray-600 mb-6">The product you're looking for doesn't exist</p>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Product not found</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">The product you're looking for doesn't exist</p>
           <button onClick={() => navigate('/products')} className="btn-primary">
             Back to Products
           </button>
@@ -75,12 +75,12 @@ const ProductDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-dark-950 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back Button */}
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 mb-6"
+          className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-6 transition-colors"
         >
           <ArrowLeftIcon className="h-5 w-5" />
           <span>Back</span>
@@ -89,7 +89,7 @@ const ProductDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Product Images */}
           <div>
-            <div className="aspect-square bg-white rounded-lg overflow-hidden mb-4">
+            <div className="aspect-square bg-white dark:bg-dark-900 rounded-lg overflow-hidden mb-4 border border-gray-200 dark:border-dark-800">
               {currentProduct.images?.[selectedImage] ? (
                 <img
                   src={currentProduct.images[selectedImage]}
@@ -115,9 +115,8 @@ const ProductDetail = () => {
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
-                    className={`aspect-square rounded-lg overflow-hidden border-2 ${
-                      selectedImage === index ? 'border-primary-500' : 'border-gray-200'
-                    }`}
+                    className={`aspect-square rounded-lg overflow-hidden border-2 ${selectedImage === index ? 'border-primary-500' : 'border-gray-200'
+                      }`}
                   >
                     <img
                       src={image}
@@ -140,8 +139,8 @@ const ProductDetail = () => {
                 </span>
               </div>
               <div>
-                <h3 className="font-medium text-gray-900">{currentProduct.artist.name}</h3>
-                <div className="flex items-center space-x-1 text-sm text-gray-500">
+                <h3 className="font-medium text-gray-900 dark:text-white">{currentProduct.artist.name}</h3>
+                <div className="flex items-center space-x-1 text-sm text-gray-500 dark:text-gray-400">
                   <MapPinIcon className="h-4 w-4" />
                   <span>{currentProduct.artist.location}</span>
                 </div>
@@ -149,26 +148,26 @@ const ProductDetail = () => {
             </div>
 
             {/* Product Title */}
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">{currentProduct.name}</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{currentProduct.name}</h1>
 
             {/* Price */}
-            <div className="text-3xl font-bold text-primary-600 mb-6">
+            <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-6">
               ₹{currentProduct.price.toLocaleString()}
             </div>
 
             {/* Description */}
             {currentProduct.description && (
               <div className="mb-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Description</h3>
-                <p className="text-gray-600 leading-relaxed">{currentProduct.description}</p>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Description</h3>
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{currentProduct.description}</p>
               </div>
             )}
 
             {/* AI Story */}
             {currentProduct.aiStory && (
-              <div className="mb-6 p-4 bg-gradient-to-r from-primary-50 to-secondary-50 rounded-lg">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">AI-Generated Story</h3>
-                <p className="text-gray-700 leading-relaxed">{currentProduct.aiStory}</p>
+              <div className="mb-6 p-4 bg-gradient-to-r from-primary-50 to-secondary-50 dark:from-primary-900/30 dark:to-secondary-900/30 rounded-lg border border-primary-100 dark:border-primary-800">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">AI-Generated Story</h3>
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{currentProduct.aiStory}</p>
               </div>
             )}
 
@@ -192,23 +191,23 @@ const ProductDetail = () => {
             {/* Quantity and Add to Cart */}
             <div className="mb-8">
               <div className="flex items-center space-x-4 mb-4">
-                <label htmlFor="quantity" className="text-sm font-medium text-gray-700">
+                <label htmlFor="quantity" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   Quantity:
                 </label>
-                <div className="flex items-center border border-gray-300 rounded-lg">
-                <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  title="Decrease quantity"
-                  className="px-3 py-2 text-gray-600 hover:text-gray-900"
-                  disabled={quantity <= 1}
-                >
-                  -
-                </button>
-                  <span className="px-4 py-2 border-x border-gray-300">{quantity}</span>
+                <div className="flex items-center border border-gray-300 dark:border-dark-700 rounded-lg bg-white dark:bg-dark-800">
+                  <button
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    title="Decrease quantity"
+                    className="px-3 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                    disabled={quantity <= 1}
+                  >
+                    -
+                  </button>
+                  <span className="px-4 py-2 border-x border-gray-300 dark:border-dark-700 text-gray-900 dark:text-white">{quantity}</span>
                   <button
                     onClick={() => setQuantity(Math.min(currentProduct.stock, quantity + 1))}
                     title="Increase quantity"
-                    className="px-3 py-2 text-gray-600 hover:text-gray-900"
+                    className="px-3 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                     disabled={quantity >= currentProduct.stock}
                   >
                     +
@@ -225,49 +224,49 @@ const ProductDetail = () => {
                   <ShoppingCartIcon className="h-5 w-5" />
                   <span>Add to Cart</span>
                 </button>
-                
+
                 <button
                   onClick={() => setIsLiked(!isLiked)}
-                  className="p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="p-3 border border-gray-300 dark:border-dark-700 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-800 transition-colors"
                 >
                   {isLiked ? (
                     <HeartSolidIcon className="h-6 w-6 text-red-500" />
                   ) : (
-                    <HeartIcon className="h-6 w-6 text-gray-400" />
+                    <HeartIcon className="h-6 w-6 text-gray-400 dark:text-gray-500" />
                   )}
                 </button>
-                
+
                 <button
                   onClick={handleShare}
                   title="Share product"
-                  className="p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="p-3 border border-gray-300 dark:border-dark-700 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-800 transition-colors"
                 >
-                  <ShareIcon className="h-6 w-6 text-gray-400" />
+                  <ShareIcon className="h-6 w-6 text-gray-400 dark:text-gray-500" />
                 </button>
               </div>
             </div>
 
             {/* Product Details */}
-            <div className="border-t border-gray-200 pt-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Product Details</h3>
+            <div className="border-t border-gray-200 dark:border-dark-800 pt-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Product Details</h3>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Artist</span>
-                  <span className="font-medium">{currentProduct.artist.name}</span>
+                  <span className="text-gray-600 dark:text-gray-400">Artist</span>
+                  <span className="font-medium text-gray-900 dark:text-gray-200">{currentProduct.artist.name}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Location</span>
-                  <span className="font-medium">{currentProduct.artist.location}</span>
+                  <span className="text-gray-600 dark:text-gray-400">Location</span>
+                  <span className="font-medium text-gray-900 dark:text-gray-200">{currentProduct.artist.location}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Created</span>
-                  <span className="font-medium">
+                  <span className="text-gray-600 dark:text-gray-400">Created</span>
+                  <span className="font-medium text-gray-900 dark:text-gray-200">
                     {new Date(currentProduct.createdAt).toLocaleDateString()}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Stock</span>
-                  <span className="font-medium">{currentProduct.stock} items</span>
+                  <span className="text-gray-600 dark:text-gray-400">Stock</span>
+                  <span className="font-medium text-gray-900 dark:text-gray-200">{currentProduct.stock} items</span>
                 </div>
               </div>
             </div>

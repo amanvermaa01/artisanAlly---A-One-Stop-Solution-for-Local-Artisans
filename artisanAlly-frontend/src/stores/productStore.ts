@@ -126,7 +126,7 @@ export const useProductStore = create<ProductState>((set, get) => ({
       (product) =>
         product.name.toLowerCase().includes(query.toLowerCase()) ||
         product.description?.toLowerCase().includes(query.toLowerCase()) ||
-        product.artist.name.toLowerCase().includes(query.toLowerCase())
+        product.artist?.name.toLowerCase().includes(query.toLowerCase())
     );
   },
 }));

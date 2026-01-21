@@ -6,7 +6,7 @@ import { useAuthStore } from '../stores/authStore';
 import ProductCard from '../components/ProductCard';
 import PostCard from '../components/PostCard';
 import {
-  SparklesIcon, 
+  SparklesIcon,
   ArrowRightIcon,
   StarIcon,
   UsersIcon,
@@ -59,7 +59,7 @@ const Home = () => {
 
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50 dark:bg-dark-950 transition-colors duration-300">
       {/* Hero Section */}
       <section className="relative bg-white dark:bg-dark-900 overflow-hidden min-h-screen flex items-center transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -67,10 +67,10 @@ const Home = () => {
             {/* Left Content */}
             <div className="space-y-8">
               <div className="space-y-6">
-                <h1 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-gray-900 dark:text-gray-100 leading-tight">
+                <h1 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-gray-900 dark:text-white leading-tight">
                   Empowering
                   <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500 dark:from-orange-400 dark:to-red-400">
                     Local Artisans
                   </span>
                   <br />
@@ -80,17 +80,17 @@ const Home = () => {
                   ArtisanAlly provides an effective and powerful way to connect traditional craftsmanship with modern AI technology.
                 </p>
               </div>
-              
+
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link 
-                  to="/products" 
+                <Link
+                  to="/products"
                   className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-gray-900 dark:bg-gray-100 dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
                 >
                   Explore Products
                 </Link>
                 {(!user || user.role !== 'artisan') && (
-                  <Link 
-                    to="/register" 
+                  <Link
+                    to="/register"
                     className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-gray-900 dark:text-gray-100 border-2 border-gray-900 dark:border-gray-100 rounded-lg hover:bg-gray-900 hover:text-white dark:hover:bg-gray-100 dark:hover:text-gray-900 transition-colors"
                   >
                     Join as Artisan
@@ -98,7 +98,6 @@ const Home = () => {
                 )}
               </div>
 
-              {/* Feature highlights */}
               <div className="flex items-center space-x-8 pt-8">
                 <div className="flex items-center space-x-3">
                   <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
@@ -107,53 +106,25 @@ const Home = () => {
                     </div>
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">Speed &</p>
-                    <p className="text-sm text-gray-600">Security</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                    <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">🔄</span>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">Flexibility &</p>
-                    <p className="text-sm text-gray-600">Scalability</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                    <div className="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">🤝</span>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">Better</p>
-                    <p className="text-sm text-gray-600">Collaboration</p>
+                    <p className="font-semibold text-gray-900 dark:text-white">Fast & Secure</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Optimized for performance</p>
                   </div>
                 </div>
               </div>
             </div>
-            
+
             {/* Right Illustration */}
-            <div className="relative">
+            <div className="relative hidden lg:block">
               <div className="relative z-10">
-                {/* This will be replaced with the actual illustration */}
                 <div className="w-full h-96 bg-gradient-to-br from-orange-100 to-blue-100 rounded-3xl flex items-center justify-center relative overflow-hidden">
-                  {/* Artisan illustration placeholder */}
                   <div className="text-8xl">🎨</div>
-                  {/* Robot illustration placeholder */}
                   <div className="absolute top-4 right-4 text-4xl">🤖</div>
-                  {/* Chart/growth indicator */}
                   <div className="absolute top-4 left-4 w-16 h-12 bg-yellow-200 rounded-lg flex items-center justify-center">
                     <div className="text-2xl">📈</div>
                   </div>
                 </div>
               </div>
-              
+
               {/* Floating elements */}
               <div className="absolute -top-4 -left-4 w-24 h-24 bg-yellow-200 rounded-2xl transform rotate-12 opacity-80"></div>
               <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-blue-200 rounded-full opacity-80"></div>
@@ -164,7 +135,7 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-dark-900/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Left side - Illustration */}
@@ -180,7 +151,7 @@ const Home = () => {
                   <div className="absolute top-8 right-8 text-2xl animate-pulse delay-200">💡</div>
                   <div className="absolute bottom-8 left-8 text-2xl animate-pulse delay-300">🎯</div>
                 </div>
-                
+
                 {/* Floating decorative elements */}
                 <div className="absolute -top-6 -left-6 w-20 h-20 bg-orange-300 rounded-2xl transform rotate-12 opacity-70"></div>
                 <div className="absolute -bottom-6 -right-6 w-16 h-16 bg-blue-300 rounded-full opacity-70"></div>
@@ -188,7 +159,7 @@ const Home = () => {
                 <div className="absolute bottom-1/3 -left-4 w-10 h-10 bg-purple-300 rounded-lg transform -rotate-12 opacity-60"></div>
               </div>
             </div>
-            
+
             {/* Right side - Content */}
             <div className="space-y-8 order-1 lg:order-2">
               <div className="space-y-4">
@@ -199,11 +170,11 @@ const Home = () => {
                     ArtisanAlly?
                   </span>
                 </h2>
-                <p className="text-lg text-gray-600 leading-relaxed">
+                <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                   We combine the beauty of traditional craftsmanship with cutting-edge AI technology to empower artisans worldwide.
                 </p>
               </div>
-              
+
               {/* Feature list */}
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
@@ -211,38 +182,38 @@ const Home = () => {
                     <SparklesIcon className="h-6 w-6 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">AI-Powered Marketing</h3>
-                    <p className="text-gray-600">Leverage AI to create compelling product descriptions and marketing content</p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">AI-Powered Marketing</h3>
+                    <p className="text-gray-600 dark:text-gray-400">Leverage AI to create compelling product descriptions and marketing content</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
                     <GlobeAltIcon className="h-6 w-6 text-green-600" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">Global Reach</h3>
-                    <p className="text-gray-600">Connect with customers worldwide and expand your market presence</p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Global Reach</h3>
+                    <p className="text-gray-600 dark:text-gray-400">Connect with customers worldwide and expand your market presence</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
                     <UsersIcon className="h-6 w-6 text-purple-600" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">Community Support</h3>
-                    <p className="text-gray-600">Join a vibrant community of artisans and craft enthusiasts</p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Community Support</h3>
+                    <p className="text-gray-600 dark:text-gray-400">Join a vibrant community of artisans and craft enthusiasts</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
                     <LightBulbIcon className="h-6 w-6 text-orange-600" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">Trend Insights</h3>
-                    <p className="text-gray-600">Stay ahead with AI-powered market trends and consumer insights</p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Trend Insights</h3>
+                    <p className="text-gray-600 dark:text-gray-400">Stay ahead with AI-powered market trends and consumer insights</p>
                   </div>
                 </div>
               </div>
@@ -252,14 +223,14 @@ const Home = () => {
       </section>
 
       {/* Featured Products */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-dark-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-12">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
                 Featured Products
               </h2>
-              <p className="text-xl text-gray-600">
+              <p className="text-xl text-gray-600 dark:text-gray-400">
                 Discover unique handcrafted items from talented artisans
               </p>
             </div>
@@ -278,14 +249,14 @@ const Home = () => {
       </section>
 
       {/* Recent Stories */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-dark-900/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-12">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
                 Artisan Stories
               </h2>
-              <p className="text-xl text-gray-600">
+              <p className="text-xl text-gray-600 dark:text-gray-400">
                 Read about the journey and inspiration behind each creation
               </p>
             </div>
@@ -304,21 +275,21 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-dark-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Ready to Start Your Journey?
           </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
             Join thousands of artisans who are already using ArtisanAlly to grow their business
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             {!user && (
-              <Link to="/register" className="bg-gray-900 text-white hover:bg-gray-800 font-medium py-3 px-8 rounded-lg transition-colors">
+              <Link to="/register" className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 font-medium py-3 px-8 rounded-lg transition-colors">
                 Get Started Today
               </Link>
             )}
-            <Link to="/ai-tools" className="border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white font-medium py-3 px-8 rounded-lg transition-colors">
+            <Link to="/ai-tools" className="border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 font-medium py-3 px-8 rounded-lg transition-colors">
               Try AI Tools
             </Link>
           </div>
