@@ -1,19 +1,8 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "artisanAlly-backend/server.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "artisanAlly-frontend/dist",
-      "use": "@vercel/static"
-    }
-  ],
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/artisanAlly-backend/server.js"
+      "destination": "/api/index.js"
     },
     {
       "source": "/(.*)",
